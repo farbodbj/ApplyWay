@@ -1,0 +1,60 @@
+% =============================================================================
+% ApplyWay — راهنمای جامع مهاجرت تحصیلی
+% کامپایل: xelatex main.tex (دو بار برای فهرست مطالب)
+% =============================================================================
+
+\documentclass[
+  a4paper,
+  12pt,
+  oneside,
+  openany,
+]{book}
+
+\input{preamble}
+
+% --- متادیتا ---
+\renewcommand{\GuideTitle}{راهنمای جامع مهاجرت تحصیلی}
+\renewcommand{\GuideSubtitle}{از انتخاب مقصد تا ورود و شروع تحصیل}
+\renewcommand{\GuideAuthor}{فربد بیجاری}
+\renewcommand{\GuideVersion}{0.1}
+
+\begin{document}
+\linespread{1.6}\selectfont
+
+% --- صفحه عنوان ---
+\input{titlepage}
+\thispagestyle{empty}
+\newpage
+
+% --- پیش‌گفتار ---
+\chapter*{پیش‌گفتار}
+\addcontentsline{toc}{chapter}{پیش‌گفتار}
+
+این راهنما با هدف جمع‌آوری تجربیات و منابع مفید برای دانشجویانی تهیه شده
+که مسیر پذیرش، ویزا و آمادگی برای تحصیل در خارج از کشور را طی می‌کنند.
+محتوای هر فصل مستقل است و می‌توانید مستقیماً به بخش مورد نیاز مراجعه کنید.
+
+\begin{warningbox}[title={سلب مسئولیت}]
+  قوانین مهاجرت و پذیرش دانشگاه به‌سرعت تغییر می‌کنند.
+  همیشه اطلاعات را از منابع رسمی مثل سایت دانشگاه‌ها و سفارت‌ها
+   پیگیری کنید. این راهنما جایگزین مشاوره حقوقی یا
+  رسمی نیست.
+\end{warningbox}
+
+% --- فهرست مطالب ---
+\tableofcontents
+\newpage
+
+% --- فصل‌ها ---
+\include{sections/introduction}
+\include{sections/admission}
+\include{sections/visa}
+\include{sections/preparation}
+\include{sections/arrival}
+\include{sections/resources}
+
+% --- منابع ---
+\bibliographystyle{unsrt-fa}
+\bibliography{references}
+
+\end{document}

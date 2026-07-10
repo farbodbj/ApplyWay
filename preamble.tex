@@ -1,0 +1,217 @@
+% =============================================================================
+% preamble.tex — تنظیمات مشترک راهنمای مهاجرت تحصیلی
+% کامپایل با XeLaTeX
+% =============================================================================
+
+\usepackage[
+  top=25mm,
+  bottom=25mm,
+  left=20mm,
+  right=25mm,
+  headheight=15pt,
+]{geometry}
+
+\usepackage{graphicx}
+\usepackage{xcolor}
+\usepackage{amsmath,amssymb}
+\usepackage{setspace}
+\usepackage{enumitem}
+\usepackage{booktabs}
+\usepackage{longtable}
+\usepackage{array}
+\usepackage{multirow}
+\usepackage{fancyhdr}
+\usepackage[nottoc]{tocbibind}
+\usepackage{url}
+
+% رنگ‌ها (قبل از hyperref)
+\definecolor{ApplyWayPrimary}{HTML}{1A5276}
+\definecolor{ApplyWaySecondary}{HTML}{2E86C1}
+\definecolor{ApplyWayLink}{HTML}{1565C0}
+\definecolor{ApplyWayTip}{HTML}{E8F6F3}
+\definecolor{ApplyWayTipBorder}{HTML}{1ABC9C}
+\definecolor{ApplyWayWarn}{HTML}{FEF9E7}
+\definecolor{ApplyWayWarnBorder}{HTML}{F39C12}
+\definecolor{ApplyWayInfo}{HTML}{EBF5FB}
+\definecolor{ApplyWayInfoBorder}{HTML}{3498DB}
+\definecolor{ApplyWayCheck}{HTML}{F4ECF7}
+\definecolor{ApplyWayCheckBorder}{HTML}{8E44AD}
+
+% tcolorbox باید قبل از xepersian بارگذاری شود
+\usepackage[most]{tcolorbox}
+\tcbuselibrary{skins,breakable}
+
+\usepackage[pagebackref=false,colorlinks,linkcolor=ApplyWayLink,citecolor=ApplyWayLink,urlcolor=ApplyWayLink]{hyperref}
+\usepackage[nameinlink]{cleveref}
+
+% =============================================================================
+% xepersian — در انتها (مثل قالب پایان‌نامه)
+% =============================================================================
+\usepackage{fontspec}
+\usepackage{xepersian}
+
+\SepMark{-}
+
+\settextfont[
+  Scale=1.05,
+  BoldFont={*-Bold},
+  ItalicFont={*-Light},
+]{Vazirmatn}
+
+% \settextfont[Scale=1.2,Path=Fonts/,BoldFont=B Nazanin Bold.ttf]{B Nazanin.ttf}
+
+\setlatintextfont{DejaVu Sans}
+
+\setdigitfont[
+  Scale=1.05,
+  BoldFont={*-Bold},
+]{Vazirmatn}
+
+% titlesec باید پس از xepersian باشد تا عناوین RTL درست تراز شوند
+
+\usepackage{hyperref}
+\usepackage{framed}
+
+
+% \makeatletter
+% \titleformat{\chapter}[display]
+%   {\normalfont\huge\bfseries\color{ApplyWayPrimary}\if@RTL\raggedleft\else\raggedright\fi}
+%   {\Large\if@RTL\raggedleft\else\raggedright\fi\chaptername~\tartibi{chapter}}
+%   {1ex}
+%   {\titlerule[1.2pt]\vspace{1ex}}
+%   [\vspace{1ex}]
+
+% \titleformat{\section}
+%   {\normalfont\Large\bfseries\color{ApplyWayPrimary}\if@RTL\raggedleft\else\raggedright\fi}
+%   {\tartibi{section}}
+%   {0.8em}
+%   {}
+
+% \titleformat{\subsection}
+%   {\normalfont\large\bfseries\if@RTL\raggedleft\else\raggedright\fi}
+%   {\tartibi{subsection}}
+%   {0.8em}
+%   {}
+
+% \bidi@patchcmd{\chaptermark}{\thechapter}{\tartibi{chapter}}{}{}
+% \usepackage{titlesec}
+
+\makeatother
+
+\renewcommand{\chaptermark}[1]{\markboth{\chaptername~\tartibi{chapter}: #1}{}}
+
+% =============================================================================
+% جعبه‌های محتوایی — معادل callout در وبلاگ
+% =============================================================================
+\newtcolorbox{tipbox}[1][]{
+  enhanced,
+  breakable,
+  colback=ApplyWayTip,
+  colframe=ApplyWayTipBorder,
+  fonttitle=\bfseries,
+  title={\awicon{tip} نکته},
+  #1,
+}
+
+\newtcolorbox{warningbox}[1][]{
+  enhanced,
+  breakable,
+  colback=ApplyWayWarn,
+  colframe=ApplyWayWarnBorder,
+  fonttitle=\bfseries,
+  title={\awicon{warn} هشدار},
+  #1,
+}
+
+\newtcolorbox{infobox}[1][]{
+  enhanced,
+  breakable,
+  colback=ApplyWayInfo,
+  colframe=ApplyWayInfoBorder,
+  fonttitle=\bfseries,
+  title={\awicon{info} اطلاعات},
+  #1,
+}
+
+\newtcolorbox{checklistbox}[1][]{
+  enhanced,
+  breakable,
+  colback=ApplyWayCheck,
+  colframe=ApplyWayCheckBorder,
+  fonttitle=\bfseries,
+  title={\awicon{check} چک‌لیست},
+  #1,
+}
+
+% آیکون‌های ساده در عنوان جعبه‌ها
+\def\awiconTip{$\star$}
+\def\awiconWarn{$\triangle$}
+\def\awiconInfo{$\circ$}
+\def\awiconCheck{$\square$}
+\def\awiconLink{$\rightarrow$}
+\newcommand{\awicon}[1]{%
+  \ifstrequal{#1}{tip}{\awiconTip}{%
+  \ifstrequal{#1}{warn}{\awiconWarn}{%
+  \ifstrequal{#1}{info}{\awiconInfo}{%
+  \ifstrequal{#1}{check}{\awiconCheck}{%
+  \ifstrequal{#1}{link}{\awiconLink}{\textbullet}%
+  }}}}%
+}
+
+% =============================================================================
+% دستورات لینک
+% =============================================================================
+\newcommand{\weblink}[2]{%
+  \href{#2}{\lr{#1}}%
+  \footnote{\url{#2}}%
+}
+
+\newcommand{\reslink}[2]{%
+  \item \textbf{#1}: \href{#2}{\nolinkurl{#2}}%
+}
+
+\newenvironment{weblinks}{%
+  \begin{itemize}[label=\awicon{link}, leftmargin=*, itemsep=0.4em]
+}{%
+  \end{itemize}
+}
+
+% =============================================================================
+% سربرگ
+% =============================================================================
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[R]{\leftmark}
+\fancyfoot[C]{\thepage}
+\renewcommand{\headrulewidth}{0.8pt}
+\fancypagestyle{plain}{
+  \fancyhf{}
+  \fancyfoot[C]{\thepage}
+  \renewcommand{\headrulewidth}{0pt}
+}
+
+\AtBeginDocument{%
+  \crefname{chapter}{فصل}{فصول}
+  \crefname{section}{بخش}{بخش‌ها}
+  \crefname{subsection}{زیربخش}{زیربخش‌ها}
+  \crefname{figure}{شکل}{شکل‌ها}
+  \crefname{table}{جدول}{جدول‌ها}
+  \crefname{equation}{برابری}{برابری‌ها}
+  \renewcommand{\bibname}{منابع و پیوندهای مفید}
+  \renewcommand{\contentsname}{فهرست مطالب}
+  \renewcommand{\listfigurename}{فهرست شکل‌ها}
+  \renewcommand{\listtablename}{فهرست جدول‌ها}
+}
+
+\setlist[itemize]{label=\textbullet, leftmargin=*}
+\setlist[enumerate]{leftmargin=*}
+
+\newlist{checklist}{itemize}{1}
+\setlist[checklist]{label=$\square$, leftmargin=*}
+
+% متادیتا — در main.tex مقداردهی می‌شود
+\newcommand{\GuideTitle}{عنوان راهنما}
+\newcommand{\GuideSubtitle}{زیرعنوان}
+\newcommand{\GuideAuthor}{فربد بیجاری}
+\newcommand{\GuideVersion}{0.1}
+\newcommand{\GuideDate}{\today}
