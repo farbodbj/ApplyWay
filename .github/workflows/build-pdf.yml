@@ -19,6 +19,13 @@ jobs:
         with:
           root_file: main.tex
           latexmk_use_xelatex: true
+          extra_system_packages: fontconfig wget
+          pre_compile: |
+            mkdir -p /usr/local/share/fonts/vazirmatn
+            wget -q -P /usr/local/share/fonts/vazirmatn https://raw.githubusercontent.com/rastikerdar/vazirmatn/v33.003/fonts/ttf/Vazirmatn-Regular.ttf
+            wget -q -P /usr/local/share/fonts/vazirmatn https://raw.githubusercontent.com/rastikerdar/vazirmatn/v33.003/fonts/ttf/Vazirmatn-Bold.ttf
+            wget -q -P /usr/local/share/fonts/vazirmatn https://raw.githubusercontent.com/rastikerdar/vazirmatn/v33.003/fonts/ttf/Vazirmatn-Light.ttf
+            fc-cache -f
 
       - name: Upload PDF
         uses: actions/upload-artifact@v7
