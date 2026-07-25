@@ -9,6 +9,6 @@
 *.fls
 *.fdb_latexmk
 *.synctex.gz
-*.pdf
+main.pdf
 fonts/*.ttf
 fonts/*.otf
